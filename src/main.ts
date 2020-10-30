@@ -1,4 +1,4 @@
-import { LambdaIntegration, RestApi } from '@aws-cdk/aws-apigateway';
+import { JsonSchemaType, JsonSchemaVersion, LambdaIntegration, RestApi } from '@aws-cdk/aws-apigateway';
 import { Runtime } from '@aws-cdk/aws-lambda';
 import { NodejsFunction } from '@aws-cdk/aws-lambda-nodejs';
 import { App, Construct, Stack, StackProps } from '@aws-cdk/core';
@@ -47,26 +47,73 @@ export class MyStack extends Stack {
     const validatedHelloBasicResource = validatedHelloResource.addResource(
       'basic',
     );
+    const basicModel = restApi.addModel('BasicModel', {
+      contentType: 'application/json',
+      modelName: 'BasicModel',
+      schema: {
+        schema: JsonSchemaVersion.DRAFT4,
+        title: 'basicModel',
+        type: JsonSchemaType.OBJECT,
+        properties: {
+          someString: { type: JsonSchemaType.STRING },
+          someNumber: { type: JsonSchemaType.NUMBER, pattern: '[0-9]+' },
+        },
+        required: ['someString', 'someNumber'],
+      },
+    });
+    const basicValidator = restApi.addRequestValidator('BasicValidator', {
+      validateRequestParameters: true,
+      validateRequestBody: true,
+    });
     validatedHelloBasicResource.addMethod(
       'POST',
       new LambdaIntegration(basicLambda),
       {
+        requestModels: {
+          'application/json': basicModel,
+        },
         requestParameters: {
           'method.request.path.hello': true,
         },
-        requestValidatorOptions: {
-          validateRequestParameters: true,
-          requestValidatorName: 'basicValidator',
-        },
+        requestValidator: basicValidator,
       },
     );
     const validatedHellowAdvancedResource = validatedHelloResource.addResource(
       'advanced',
     );
+    const advancedModel = restApi.addModel('AdvancedModel', {
+      contentType: 'application/json',
+      modelName: 'AdvancedModel',
+      schema: {
+        schema: JsonSchemaVersion.DRAFT4,
+        title: 'advancedModel',
+        type: JsonSchemaType.OBJECT,
+        properties: {
+          greeting: { type: JsonSchemaType.STRING },
+          postfix: { type: JsonSchemaType.STRING },
+          basic: {
+            ref: `https://apigateway.amazonaws.com/restapis/${restApi.restApiId}/models/${basicModel.modelId}`,
+          },
+        },
+        required: ['greeting', 'basic'],
+      },
+    });
+    const advancedValidator = restApi.addRequestValidator('AdvancedValidator', {
+      validateRequestParameters: true,
+      validateRequestBody: true,
+    });
     validatedHellowAdvancedResource.addMethod(
       'POST',
       new LambdaIntegration(advancedLambda),
-      {},
+      {
+        requestParameters: {
+          'method.request.path.hello': true,
+        },
+        requestValidator: advancedValidator,
+        requestModels: {
+          'application/json': advancedModel,
+        },
+      },
     );
   }
 }
