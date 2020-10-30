@@ -14,6 +14,7 @@ export class MyStack extends Stack {
   constructor(scope: Construct, id: string, props: StackProps = {}) {
     super(scope, id, props);
 
+    // define the lambda functions
     const basicLambda = new NodejsFunction(this, 'basicLambdaFunction', {
       entry: `${__dirname}/lambdas/basic.ts`,
       handler: 'handler',
@@ -26,6 +27,7 @@ export class MyStack extends Stack {
       runtime: Runtime.NODEJS_12_X,
     });
 
+    // create the api and the unvalidated api (for ease of comparison)
     const restApi = new RestApi(this, 'BlogValidationApi');
 
     const unvalidatedResource = restApi.root.addResource('unvalidated');
@@ -48,11 +50,12 @@ export class MyStack extends Stack {
       {},
     );
 
+    // get the schemas and create the Models for the api
     const modelSchemas: { [key: string]: ModelOptions } = getSchemas(
       `${__dirname}/interfaces`,
       restApi.restApiId,
     );
-    console.log(JSON.stringify(modelSchemas));
+    // put them in the models object with the key naming being the same as the interface
     const models: { [key: string]: Model } = {};
     Object.keys(modelSchemas).forEach((modelSchema) => {
       if (modelSchemas[modelSchema].modelName) {
@@ -68,6 +71,7 @@ export class MyStack extends Stack {
     const validatedHelloBasicResource = validatedHelloResource.addResource(
       'basic',
     );
+    // create the first, basic, validator
     const basicValidator = restApi.addRequestValidator('BasicValidator', {
       validateRequestParameters: true,
       validateRequestBody: true,
@@ -78,9 +82,12 @@ export class MyStack extends Stack {
         passthroughBehavior: PassthroughBehavior.NEVER,
       }),
       {
+        // Basic is the interface in this case
         requestModels: {
           'application/json': models.Basic,
         },
+        // requestParameters defines which parameters to actually require
+        // hello matches what we have above in the resource ({hello})
         requestParameters: {
           'method.request.path.hello': true,
         },
@@ -112,7 +119,6 @@ export class MyStack extends Stack {
   }
 }
 
-// for development, use account/region from cdk cli
 const devEnv = {
   account: process.env.CDK_DEFAULT_ACCOUNT,
   region: process.env.CDK_DEFAULT_REGION,
@@ -121,6 +127,5 @@ const devEnv = {
 const app = new App();
 
 new MyStack(app, 'blog-validation-stack', { env: devEnv });
-// new MyStack(app, 'my-stack-prod', { env: prodEnv });
 
 app.synth();
