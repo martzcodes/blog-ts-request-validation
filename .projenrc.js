@@ -11,9 +11,6 @@ const project = new AwsCdkTypeScriptApp({
     "@aws-cdk/aws-lambda",
     "@aws-cdk/aws-lambda-nodejs",
   ],
-  dependencies: {
-    "ts-json-schema-generator": "0.77.0",
-  },
   devDependencies: {
     "@types/aws-lambda": "8.10.63",
   },
