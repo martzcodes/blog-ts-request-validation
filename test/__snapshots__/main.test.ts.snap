@@ -1,0 +1,928 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Snapshot 1`] = `
+Object {
+  "Outputs": Object {
+    "BlogValidationApiEndpoint7A5E1B61": Object {
+      "Value": Object {
+        "Fn::Join": Array [
+          "",
+          Array [
+            "https://",
+            Object {
+              "Ref": "BlogValidationApiF1CE729D",
+            },
+            ".execute-api.",
+            Object {
+              "Ref": "AWS::Region",
+            },
+            ".",
+            Object {
+              "Ref": "AWS::URLSuffix",
+            },
+            "/",
+            Object {
+              "Ref": "BlogValidationApiDeploymentStageprod88A7E1E2",
+            },
+            "/",
+          ],
+        ],
+      },
+    },
+  },
+  "Parameters": Object {
+    "AssetParameters2ef6574c7bee11dea5f02856b9f307a4bb376c06d91357d1763458d0471e8b2cArtifactHashCF08D696": Object {
+      "Description": "Artifact hash for asset \\"2ef6574c7bee11dea5f02856b9f307a4bb376c06d91357d1763458d0471e8b2c\\"",
+      "Type": "String",
+    },
+    "AssetParameters2ef6574c7bee11dea5f02856b9f307a4bb376c06d91357d1763458d0471e8b2cS3BucketCFD99995": Object {
+      "Description": "S3 bucket for asset \\"2ef6574c7bee11dea5f02856b9f307a4bb376c06d91357d1763458d0471e8b2c\\"",
+      "Type": "String",
+    },
+    "AssetParameters2ef6574c7bee11dea5f02856b9f307a4bb376c06d91357d1763458d0471e8b2cS3VersionKey253897E7": Object {
+      "Description": "S3 key for asset version \\"2ef6574c7bee11dea5f02856b9f307a4bb376c06d91357d1763458d0471e8b2c\\"",
+      "Type": "String",
+    },
+    "AssetParameters37e4b3ca0961bf4812df465a9771d780d9b60bb54b5b4c1c018406b512d27354ArtifactHashE967BD94": Object {
+      "Description": "Artifact hash for asset \\"37e4b3ca0961bf4812df465a9771d780d9b60bb54b5b4c1c018406b512d27354\\"",
+      "Type": "String",
+    },
+    "AssetParameters37e4b3ca0961bf4812df465a9771d780d9b60bb54b5b4c1c018406b512d27354S3Bucket5F38F424": Object {
+      "Description": "S3 bucket for asset \\"37e4b3ca0961bf4812df465a9771d780d9b60bb54b5b4c1c018406b512d27354\\"",
+      "Type": "String",
+    },
+    "AssetParameters37e4b3ca0961bf4812df465a9771d780d9b60bb54b5b4c1c018406b512d27354S3VersionKeyF530A643": Object {
+      "Description": "S3 key for asset version \\"37e4b3ca0961bf4812df465a9771d780d9b60bb54b5b4c1c018406b512d27354\\"",
+      "Type": "String",
+    },
+  },
+  "Resources": Object {
+    "BlogValidationApiAccount53F3CB53": Object {
+      "DependsOn": Array [
+        "BlogValidationApiF1CE729D",
+      ],
+      "Properties": Object {
+        "CloudWatchRoleArn": Object {
+          "Fn::GetAtt": Array [
+            "BlogValidationApiCloudWatchRole43230748",
+            "Arn",
+          ],
+        },
+      },
+      "Type": "AWS::ApiGateway::Account",
+    },
+    "BlogValidationApiCloudWatchRole43230748": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "Service": "apigateway.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": Array [
+          Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/service-role/AmazonAPIGatewayPushToCloudWatchLogs",
+              ],
+            ],
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "BlogValidationApiDeployment958D4D064e481077e6dc852fc3d8498aa9281f79": Object {
+      "DependsOn": Array [
+        "BlogValidationApiunvalidatedadvancedhelloGETACAD3AA4",
+        "BlogValidationApiunvalidatedadvancedhelloAD92FFAF",
+        "BlogValidationApiunvalidatedadvanced3271FCB2",
+        "BlogValidationApiunvalidatedbasichelloGET077F9FD1",
+        "BlogValidationApiunvalidatedbasichello2E146623",
+        "BlogValidationApiunvalidatedbasicAF97CF3E",
+        "BlogValidationApiunvalidated9717526A",
+        "BlogValidationApivalidatedadvancedhelloGET64603ED5",
+        "BlogValidationApivalidatedadvancedhello16B8B0C8",
+        "BlogValidationApivalidatedadvancedF9925123",
+        "BlogValidationApivalidatedbasichelloGET77E20430",
+        "BlogValidationApivalidatedbasichelloBB939358",
+        "BlogValidationApivalidatedbasic7B6C996A",
+        "BlogValidationApivalidatedD40D47EF",
+      ],
+      "Properties": Object {
+        "Description": "Automatically created by the RestApi construct",
+        "RestApiId": Object {
+          "Ref": "BlogValidationApiF1CE729D",
+        },
+      },
+      "Type": "AWS::ApiGateway::Deployment",
+    },
+    "BlogValidationApiDeploymentStageprod88A7E1E2": Object {
+      "Properties": Object {
+        "DeploymentId": Object {
+          "Ref": "BlogValidationApiDeployment958D4D064e481077e6dc852fc3d8498aa9281f79",
+        },
+        "RestApiId": Object {
+          "Ref": "BlogValidationApiF1CE729D",
+        },
+        "StageName": "prod",
+      },
+      "Type": "AWS::ApiGateway::Stage",
+    },
+    "BlogValidationApiF1CE729D": Object {
+      "Properties": Object {
+        "Name": "BlogValidationApi",
+      },
+      "Type": "AWS::ApiGateway::RestApi",
+    },
+    "BlogValidationApiunvalidated9717526A": Object {
+      "Properties": Object {
+        "ParentId": Object {
+          "Fn::GetAtt": Array [
+            "BlogValidationApiF1CE729D",
+            "RootResourceId",
+          ],
+        },
+        "PathPart": "unvalidated",
+        "RestApiId": Object {
+          "Ref": "BlogValidationApiF1CE729D",
+        },
+      },
+      "Type": "AWS::ApiGateway::Resource",
+    },
+    "BlogValidationApiunvalidatedadvanced3271FCB2": Object {
+      "Properties": Object {
+        "ParentId": Object {
+          "Ref": "BlogValidationApiunvalidated9717526A",
+        },
+        "PathPart": "advanced",
+        "RestApiId": Object {
+          "Ref": "BlogValidationApiF1CE729D",
+        },
+      },
+      "Type": "AWS::ApiGateway::Resource",
+    },
+    "BlogValidationApiunvalidatedadvancedhelloAD92FFAF": Object {
+      "Properties": Object {
+        "ParentId": Object {
+          "Ref": "BlogValidationApiunvalidatedadvanced3271FCB2",
+        },
+        "PathPart": "{hello}",
+        "RestApiId": Object {
+          "Ref": "BlogValidationApiF1CE729D",
+        },
+      },
+      "Type": "AWS::ApiGateway::Resource",
+    },
+    "BlogValidationApiunvalidatedadvancedhelloGETACAD3AA4": Object {
+      "Properties": Object {
+        "AuthorizationType": "NONE",
+        "HttpMethod": "GET",
+        "Integration": Object {
+          "IntegrationHttpMethod": "POST",
+          "Type": "AWS_PROXY",
+          "Uri": Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":apigateway:",
+                Object {
+                  "Ref": "AWS::Region",
+                },
+                ":lambda:path/2015-03-31/functions/",
+                Object {
+                  "Fn::GetAtt": Array [
+                    "advancedLambdaFunction225720E0",
+                    "Arn",
+                  ],
+                },
+                "/invocations",
+              ],
+            ],
+          },
+        },
+        "ResourceId": Object {
+          "Ref": "BlogValidationApiunvalidatedadvancedhelloAD92FFAF",
+        },
+        "RestApiId": Object {
+          "Ref": "BlogValidationApiF1CE729D",
+        },
+      },
+      "Type": "AWS::ApiGateway::Method",
+    },
+    "BlogValidationApiunvalidatedadvancedhelloGETApiPermissionTesttestBlogValidationApi894CF290GETunvalidatedadvancedhello7619AE68": Object {
+      "Properties": Object {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": Object {
+          "Fn::GetAtt": Array [
+            "advancedLambdaFunction225720E0",
+            "Arn",
+          ],
+        },
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": Object {
+          "Fn::Join": Array [
+            "",
+            Array [
+              "arn:",
+              Object {
+                "Ref": "AWS::Partition",
+              },
+              ":execute-api:",
+              Object {
+                "Ref": "AWS::Region",
+              },
+              ":",
+              Object {
+                "Ref": "AWS::AccountId",
+              },
+              ":",
+              Object {
+                "Ref": "BlogValidationApiF1CE729D",
+              },
+              "/test-invoke-stage/GET/unvalidated/advanced/*",
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::Lambda::Permission",
+    },
+    "BlogValidationApiunvalidatedadvancedhelloGETApiPermissiontestBlogValidationApi894CF290GETunvalidatedadvancedhelloB04D3538": Object {
+      "Properties": Object {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": Object {
+          "Fn::GetAtt": Array [
+            "advancedLambdaFunction225720E0",
+            "Arn",
+          ],
+        },
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": Object {
+          "Fn::Join": Array [
+            "",
+            Array [
+              "arn:",
+              Object {
+                "Ref": "AWS::Partition",
+              },
+              ":execute-api:",
+              Object {
+                "Ref": "AWS::Region",
+              },
+              ":",
+              Object {
+                "Ref": "AWS::AccountId",
+              },
+              ":",
+              Object {
+                "Ref": "BlogValidationApiF1CE729D",
+              },
+              "/",
+              Object {
+                "Ref": "BlogValidationApiDeploymentStageprod88A7E1E2",
+              },
+              "/GET/unvalidated/advanced/*",
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::Lambda::Permission",
+    },
+    "BlogValidationApiunvalidatedbasicAF97CF3E": Object {
+      "Properties": Object {
+        "ParentId": Object {
+          "Ref": "BlogValidationApiunvalidated9717526A",
+        },
+        "PathPart": "basic",
+        "RestApiId": Object {
+          "Ref": "BlogValidationApiF1CE729D",
+        },
+      },
+      "Type": "AWS::ApiGateway::Resource",
+    },
+    "BlogValidationApiunvalidatedbasichello2E146623": Object {
+      "Properties": Object {
+        "ParentId": Object {
+          "Ref": "BlogValidationApiunvalidatedbasicAF97CF3E",
+        },
+        "PathPart": "{hello}",
+        "RestApiId": Object {
+          "Ref": "BlogValidationApiF1CE729D",
+        },
+      },
+      "Type": "AWS::ApiGateway::Resource",
+    },
+    "BlogValidationApiunvalidatedbasichelloGET077F9FD1": Object {
+      "Properties": Object {
+        "AuthorizationType": "NONE",
+        "HttpMethod": "GET",
+        "Integration": Object {
+          "IntegrationHttpMethod": "POST",
+          "Type": "AWS_PROXY",
+          "Uri": Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":apigateway:",
+                Object {
+                  "Ref": "AWS::Region",
+                },
+                ":lambda:path/2015-03-31/functions/",
+                Object {
+                  "Fn::GetAtt": Array [
+                    "basicLambdaFunctionF69553F9",
+                    "Arn",
+                  ],
+                },
+                "/invocations",
+              ],
+            ],
+          },
+        },
+        "ResourceId": Object {
+          "Ref": "BlogValidationApiunvalidatedbasichello2E146623",
+        },
+        "RestApiId": Object {
+          "Ref": "BlogValidationApiF1CE729D",
+        },
+      },
+      "Type": "AWS::ApiGateway::Method",
+    },
+    "BlogValidationApiunvalidatedbasichelloGETApiPermissionTesttestBlogValidationApi894CF290GETunvalidatedbasichello3048DBC8": Object {
+      "Properties": Object {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": Object {
+          "Fn::GetAtt": Array [
+            "basicLambdaFunctionF69553F9",
+            "Arn",
+          ],
+        },
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": Object {
+          "Fn::Join": Array [
+            "",
+            Array [
+              "arn:",
+              Object {
+                "Ref": "AWS::Partition",
+              },
+              ":execute-api:",
+              Object {
+                "Ref": "AWS::Region",
+              },
+              ":",
+              Object {
+                "Ref": "AWS::AccountId",
+              },
+              ":",
+              Object {
+                "Ref": "BlogValidationApiF1CE729D",
+              },
+              "/test-invoke-stage/GET/unvalidated/basic/*",
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::Lambda::Permission",
+    },
+    "BlogValidationApiunvalidatedbasichelloGETApiPermissiontestBlogValidationApi894CF290GETunvalidatedbasichello0F188049": Object {
+      "Properties": Object {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": Object {
+          "Fn::GetAtt": Array [
+            "basicLambdaFunctionF69553F9",
+            "Arn",
+          ],
+        },
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": Object {
+          "Fn::Join": Array [
+            "",
+            Array [
+              "arn:",
+              Object {
+                "Ref": "AWS::Partition",
+              },
+              ":execute-api:",
+              Object {
+                "Ref": "AWS::Region",
+              },
+              ":",
+              Object {
+                "Ref": "AWS::AccountId",
+              },
+              ":",
+              Object {
+                "Ref": "BlogValidationApiF1CE729D",
+              },
+              "/",
+              Object {
+                "Ref": "BlogValidationApiDeploymentStageprod88A7E1E2",
+              },
+              "/GET/unvalidated/basic/*",
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::Lambda::Permission",
+    },
+    "BlogValidationApivalidatedD40D47EF": Object {
+      "Properties": Object {
+        "ParentId": Object {
+          "Fn::GetAtt": Array [
+            "BlogValidationApiF1CE729D",
+            "RootResourceId",
+          ],
+        },
+        "PathPart": "validated",
+        "RestApiId": Object {
+          "Ref": "BlogValidationApiF1CE729D",
+        },
+      },
+      "Type": "AWS::ApiGateway::Resource",
+    },
+    "BlogValidationApivalidatedadvancedF9925123": Object {
+      "Properties": Object {
+        "ParentId": Object {
+          "Ref": "BlogValidationApivalidatedD40D47EF",
+        },
+        "PathPart": "advanced",
+        "RestApiId": Object {
+          "Ref": "BlogValidationApiF1CE729D",
+        },
+      },
+      "Type": "AWS::ApiGateway::Resource",
+    },
+    "BlogValidationApivalidatedadvancedhello16B8B0C8": Object {
+      "Properties": Object {
+        "ParentId": Object {
+          "Ref": "BlogValidationApivalidatedadvancedF9925123",
+        },
+        "PathPart": "{hello}",
+        "RestApiId": Object {
+          "Ref": "BlogValidationApiF1CE729D",
+        },
+      },
+      "Type": "AWS::ApiGateway::Resource",
+    },
+    "BlogValidationApivalidatedadvancedhelloGET64603ED5": Object {
+      "Properties": Object {
+        "AuthorizationType": "NONE",
+        "HttpMethod": "GET",
+        "Integration": Object {
+          "IntegrationHttpMethod": "POST",
+          "Type": "AWS_PROXY",
+          "Uri": Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":apigateway:",
+                Object {
+                  "Ref": "AWS::Region",
+                },
+                ":lambda:path/2015-03-31/functions/",
+                Object {
+                  "Fn::GetAtt": Array [
+                    "advancedLambdaFunction225720E0",
+                    "Arn",
+                  ],
+                },
+                "/invocations",
+              ],
+            ],
+          },
+        },
+        "ResourceId": Object {
+          "Ref": "BlogValidationApivalidatedadvancedhello16B8B0C8",
+        },
+        "RestApiId": Object {
+          "Ref": "BlogValidationApiF1CE729D",
+        },
+      },
+      "Type": "AWS::ApiGateway::Method",
+    },
+    "BlogValidationApivalidatedadvancedhelloGETApiPermissionTesttestBlogValidationApi894CF290GETvalidatedadvancedhelloB08F00EA": Object {
+      "Properties": Object {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": Object {
+          "Fn::GetAtt": Array [
+            "advancedLambdaFunction225720E0",
+            "Arn",
+          ],
+        },
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": Object {
+          "Fn::Join": Array [
+            "",
+            Array [
+              "arn:",
+              Object {
+                "Ref": "AWS::Partition",
+              },
+              ":execute-api:",
+              Object {
+                "Ref": "AWS::Region",
+              },
+              ":",
+              Object {
+                "Ref": "AWS::AccountId",
+              },
+              ":",
+              Object {
+                "Ref": "BlogValidationApiF1CE729D",
+              },
+              "/test-invoke-stage/GET/validated/advanced/*",
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::Lambda::Permission",
+    },
+    "BlogValidationApivalidatedadvancedhelloGETApiPermissiontestBlogValidationApi894CF290GETvalidatedadvancedhelloA7760067": Object {
+      "Properties": Object {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": Object {
+          "Fn::GetAtt": Array [
+            "advancedLambdaFunction225720E0",
+            "Arn",
+          ],
+        },
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": Object {
+          "Fn::Join": Array [
+            "",
+            Array [
+              "arn:",
+              Object {
+                "Ref": "AWS::Partition",
+              },
+              ":execute-api:",
+              Object {
+                "Ref": "AWS::Region",
+              },
+              ":",
+              Object {
+                "Ref": "AWS::AccountId",
+              },
+              ":",
+              Object {
+                "Ref": "BlogValidationApiF1CE729D",
+              },
+              "/",
+              Object {
+                "Ref": "BlogValidationApiDeploymentStageprod88A7E1E2",
+              },
+              "/GET/validated/advanced/*",
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::Lambda::Permission",
+    },
+    "BlogValidationApivalidatedbasic7B6C996A": Object {
+      "Properties": Object {
+        "ParentId": Object {
+          "Ref": "BlogValidationApivalidatedD40D47EF",
+        },
+        "PathPart": "basic",
+        "RestApiId": Object {
+          "Ref": "BlogValidationApiF1CE729D",
+        },
+      },
+      "Type": "AWS::ApiGateway::Resource",
+    },
+    "BlogValidationApivalidatedbasichelloBB939358": Object {
+      "Properties": Object {
+        "ParentId": Object {
+          "Ref": "BlogValidationApivalidatedbasic7B6C996A",
+        },
+        "PathPart": "{hello}",
+        "RestApiId": Object {
+          "Ref": "BlogValidationApiF1CE729D",
+        },
+      },
+      "Type": "AWS::ApiGateway::Resource",
+    },
+    "BlogValidationApivalidatedbasichelloGET77E20430": Object {
+      "Properties": Object {
+        "AuthorizationType": "NONE",
+        "HttpMethod": "GET",
+        "Integration": Object {
+          "IntegrationHttpMethod": "POST",
+          "Type": "AWS_PROXY",
+          "Uri": Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":apigateway:",
+                Object {
+                  "Ref": "AWS::Region",
+                },
+                ":lambda:path/2015-03-31/functions/",
+                Object {
+                  "Fn::GetAtt": Array [
+                    "basicLambdaFunctionF69553F9",
+                    "Arn",
+                  ],
+                },
+                "/invocations",
+              ],
+            ],
+          },
+        },
+        "ResourceId": Object {
+          "Ref": "BlogValidationApivalidatedbasichelloBB939358",
+        },
+        "RestApiId": Object {
+          "Ref": "BlogValidationApiF1CE729D",
+        },
+      },
+      "Type": "AWS::ApiGateway::Method",
+    },
+    "BlogValidationApivalidatedbasichelloGETApiPermissionTesttestBlogValidationApi894CF290GETvalidatedbasichello20F441CB": Object {
+      "Properties": Object {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": Object {
+          "Fn::GetAtt": Array [
+            "basicLambdaFunctionF69553F9",
+            "Arn",
+          ],
+        },
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": Object {
+          "Fn::Join": Array [
+            "",
+            Array [
+              "arn:",
+              Object {
+                "Ref": "AWS::Partition",
+              },
+              ":execute-api:",
+              Object {
+                "Ref": "AWS::Region",
+              },
+              ":",
+              Object {
+                "Ref": "AWS::AccountId",
+              },
+              ":",
+              Object {
+                "Ref": "BlogValidationApiF1CE729D",
+              },
+              "/test-invoke-stage/GET/validated/basic/*",
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::Lambda::Permission",
+    },
+    "BlogValidationApivalidatedbasichelloGETApiPermissiontestBlogValidationApi894CF290GETvalidatedbasichelloE83B7D66": Object {
+      "Properties": Object {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": Object {
+          "Fn::GetAtt": Array [
+            "basicLambdaFunctionF69553F9",
+            "Arn",
+          ],
+        },
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": Object {
+          "Fn::Join": Array [
+            "",
+            Array [
+              "arn:",
+              Object {
+                "Ref": "AWS::Partition",
+              },
+              ":execute-api:",
+              Object {
+                "Ref": "AWS::Region",
+              },
+              ":",
+              Object {
+                "Ref": "AWS::AccountId",
+              },
+              ":",
+              Object {
+                "Ref": "BlogValidationApiF1CE729D",
+              },
+              "/",
+              Object {
+                "Ref": "BlogValidationApiDeploymentStageprod88A7E1E2",
+              },
+              "/GET/validated/basic/*",
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::Lambda::Permission",
+    },
+    "advancedLambdaFunction225720E0": Object {
+      "DependsOn": Array [
+        "advancedLambdaFunctionServiceRole94547389",
+      ],
+      "Properties": Object {
+        "Code": Object {
+          "S3Bucket": Object {
+            "Ref": "AssetParameters37e4b3ca0961bf4812df465a9771d780d9b60bb54b5b4c1c018406b512d27354S3Bucket5F38F424",
+          },
+          "S3Key": Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                Object {
+                  "Fn::Select": Array [
+                    0,
+                    Object {
+                      "Fn::Split": Array [
+                        "||",
+                        Object {
+                          "Ref": "AssetParameters37e4b3ca0961bf4812df465a9771d780d9b60bb54b5b4c1c018406b512d27354S3VersionKeyF530A643",
+                        },
+                      ],
+                    },
+                  ],
+                },
+                Object {
+                  "Fn::Select": Array [
+                    1,
+                    Object {
+                      "Fn::Split": Array [
+                        "||",
+                        Object {
+                          "Ref": "AssetParameters37e4b3ca0961bf4812df465a9771d780d9b60bb54b5b4c1c018406b512d27354S3VersionKeyF530A643",
+                        },
+                      ],
+                    },
+                  ],
+                },
+              ],
+            ],
+          },
+        },
+        "Environment": Object {
+          "Variables": Object {
+            "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
+          },
+        },
+        "Handler": "index.handler",
+        "Role": Object {
+          "Fn::GetAtt": Array [
+            "advancedLambdaFunctionServiceRole94547389",
+            "Arn",
+          ],
+        },
+        "Runtime": "nodejs12.x",
+      },
+      "Type": "AWS::Lambda::Function",
+    },
+    "advancedLambdaFunctionServiceRole94547389": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "Service": "lambda.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": Array [
+          Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+              ],
+            ],
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "basicLambdaFunctionF69553F9": Object {
+      "DependsOn": Array [
+        "basicLambdaFunctionServiceRole3D0D875F",
+      ],
+      "Properties": Object {
+        "Code": Object {
+          "S3Bucket": Object {
+            "Ref": "AssetParameters2ef6574c7bee11dea5f02856b9f307a4bb376c06d91357d1763458d0471e8b2cS3BucketCFD99995",
+          },
+          "S3Key": Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                Object {
+                  "Fn::Select": Array [
+                    0,
+                    Object {
+                      "Fn::Split": Array [
+                        "||",
+                        Object {
+                          "Ref": "AssetParameters2ef6574c7bee11dea5f02856b9f307a4bb376c06d91357d1763458d0471e8b2cS3VersionKey253897E7",
+                        },
+                      ],
+                    },
+                  ],
+                },
+                Object {
+                  "Fn::Select": Array [
+                    1,
+                    Object {
+                      "Fn::Split": Array [
+                        "||",
+                        Object {
+                          "Ref": "AssetParameters2ef6574c7bee11dea5f02856b9f307a4bb376c06d91357d1763458d0471e8b2cS3VersionKey253897E7",
+                        },
+                      ],
+                    },
+                  ],
+                },
+              ],
+            ],
+          },
+        },
+        "Environment": Object {
+          "Variables": Object {
+            "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
+          },
+        },
+        "Handler": "index.handler",
+        "Role": Object {
+          "Fn::GetAtt": Array [
+            "basicLambdaFunctionServiceRole3D0D875F",
+            "Arn",
+          ],
+        },
+        "Runtime": "nodejs12.x",
+      },
+      "Type": "AWS::Lambda::Function",
+    },
+    "basicLambdaFunctionServiceRole3D0D875F": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "Service": "lambda.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": Array [
+          Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+              ],
+            ],
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+  },
+}
+`;
